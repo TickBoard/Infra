@@ -2,7 +2,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 6.0"
 
-  name = "${var.cluster_name}-vpc"
+  name = "${var.project}-vpc"
   cidr = var.vpc_cidr
 
   azs             = ["${var.aws_region}a", "${var.aws_region}b"]
@@ -12,7 +12,9 @@ module "vpc" {
   enable_nat_gateway = true
   single_nat_gateway = true
 
-  tags = local.tags
+  tags = {
+    Project = var.project
+  }
 
   public_subnet_tags = {
     "kubernetes.io/role/elb" = "1"

@@ -3,15 +3,18 @@ module "eks" {
   version = "~> 21.0"
 
   name               = var.cluster_name
-  kubernetes_version = "1.30"
+  kubernetes_version = var.k8s_version
   endpoint_public_access = true
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
+  control_plane_subnet_ids = module.vpc.private_subnets
 
   enable_cluster_creator_admin_permissions = true
 
-  tags = local.tags
+  tags = {
+    Project = var.project
+  }
 
   eks_managed_node_groups = {
     default = {
@@ -20,6 +23,14 @@ module "eks" {
       min_size      = 1
       instance_types = ["t3.medium"]
       subnet_ids     = module.vpc.private_subnets
+    }
+  }
+
+  addons = {
+    coredns = {}
+    kube-proxy = {}
+    vpc-cni = {
+      before_compute = true
     }
   }
 }

@@ -1,12 +1,5 @@
-aws_region          = "ap-southeast-2"
-aws_profile         = "eks-sideproj-admin"
-cluster_name        = "sideproj-eks"
-
-# Prometheus remote write to AMP (optional)
-enable_amp_remote_write = false
-amp_workspace_id        = "ws-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-
-# Chart versions
-kps_version        = "65.3.1"
-loki_stack_version = "2.10.2" # example version
-external_secrets_version = "0.9.16" # example version
+project       = "sideproj-eks"
+aws_region    = "ap-southeast-2"
+aws_profile   = "eks-sideproj-admin"
+cluster_name  = "sideproj-eks"
+k8s_version   = "1.30"
