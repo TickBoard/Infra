@@ -39,3 +39,20 @@ variable "kms_key_arn" {
   description = "Existing KMS key ARN for EKS secret encryption"
   default     = "arn:aws:kms:ap-southeast-2:512160136658:key/a8f9ca4f-a478-4aac-b682-b9ac23647c2a"
 }
+
+variable "github_role_name" {
+  description = "IAM role name for GitHub Actions OIDC"
+  type        = string
+  default     = "gha-deploy"
+}
+
+variable "github_oidc_subjects" {
+  description = "Allowed GitHub OIDC subjects (sub). Examples: repo:OWNER/REPO:ref:refs/heads/main, repo:OWNER/REPO:environment:prod"
+  type        = list(string)
+}
+
+variable "github_role_policy_arns" {
+  description = "List of IAM policy ARNs to attach to the GitHub Actions role (optional)"
+  type        = list(string)
+  default     = []
+}

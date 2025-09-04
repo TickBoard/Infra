@@ -3,3 +3,21 @@ aws_region    = "ap-southeast-2"
 aws_profile   = "root"
 cluster_name  = "sideproj-eks"
 k8s_version   = "1.30"
+# GitHub OIDC role configuration (examples)
+# Role name to create for GitHub Actions
+github_role_name = "gha-deploy"
+
+# Allowed GitHub OIDC subjects (any of the following patterns):
+# - repo:OWNER/REPO:ref:refs/heads/main           # specific branch
+# - repo:OWNER/REPO:pull_request                  # any PRs
+# - repo:OWNER/REPO:environment:prod              # specific environment
+# Replace OWNER/REPO with your repository
+github_oidc_subjects = [
+  # "repo:my-org/my-repo:ref:refs/heads/main",
+]
+
+# Optional: attach AWS managed policies to the role
+# For least-privilege, prefer custom policies per your needs.
+# github_role_policy_arns = [
+#   "arn:aws:iam::aws:policy/PowerUserAccess"
+# ]
